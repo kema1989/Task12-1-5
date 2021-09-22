@@ -38,6 +38,19 @@ namespace Task12_1_5
                     Console.WriteLine("Такого пользователя нет...");
                 }
             }
+
+            //var user = users.Find(x => x.Login == login);
+            //if (user.IsPremium == true)
+            //{
+            //    Console.WriteLine($"Здравствуйте, {user.Name}, как поживаете?)))");
+            //    return;
+            //}
+            //else
+            //{
+            //    Console.WriteLine($"А, халявщег? На вот, рекламку глянь)");
+            //    ShowAds();
+            //    return;
+            //}
         }
 
         static void ShowAds()
