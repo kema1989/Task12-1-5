@@ -10,20 +10,27 @@ namespace Task12_1_5
         {
             var users = new List<User>();
             users.Add(new User("lex74", "Алексей Демиденко", false));
-            users.Add(new User("", "Екатерина Колесникова", true));
+            users.Add(new User("kate2003", "Екатерина Колесникова", true));
             users.Add(new User("mike01", "Mike Peterson", true));
             users.Add(new User("bomj99", "Бомж Бомжов", false));
-            users.Add(new User("?????", "Аноним", true));
+            users.Add(new User("???", "Аноним", true));
 
-            Console.WriteLine("Введите логин:");
-            string login = Console.ReadLine();
-            for (int i = 0; i < users.Count; i++)
+            try
             {
-                if (login == users[i].Login)
+                Console.WriteLine("Введите логин:");
+                string login = Console.ReadLine();
+                
+                var user = users.Find(x => x.Login == login);
+
+                if (user == null)
                 {
-                    if (users[i].IsPremium == true)
+                    throw new Exception("Пользователя с таким логином нет...");
+                }
+                else
+                {
+                    if (user.IsPremium)
                     {
-                        Console.WriteLine($"Здравствуйте, {users[i].Name}, как поживаете?)))");
+                        Console.WriteLine($"Здравствуйте, {user.Name}, как поживаете?)))");
                         return;
                     }
                     else
@@ -33,24 +40,15 @@ namespace Task12_1_5
                         return;
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Такого пользователя нет...");
-                }
             }
-
-            //var user = users.Find(x => x.Login == login);
-            //if (user.IsPremium == true)
-            //{
-            //    Console.WriteLine($"Здравствуйте, {user.Name}, как поживаете?)))");
-            //    return;
-            //}
-            //else
-            //{
-            //    Console.WriteLine($"А, халявщег? На вот, рекламку глянь)");
-            //    ShowAds();
-            //    return;
-            //}
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("Логин не может быть пустым...");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         static void ShowAds()
